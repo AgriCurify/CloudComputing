@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
     res.send("API AgriCurify");
 });
 
-app.use(authRoutes)
+app.use(authRoutes);
 
 app.listen(PORT, () => {
     console.log("Server running on http://localhost:" + PORT);
