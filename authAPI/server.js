@@ -1,7 +1,7 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const logRequest = require('./middleware/logs');
-const authRoutes = require('./routes/authRoutes')
+const express = require("express");
+const dotenv = require("dotenv");
+const logRequest = require("./middleware/logs");
+const authRoutes = require("./routes/authRoutes");
 
 dotenv.config();
 
@@ -12,11 +12,11 @@ app.use(express.json());
 app.use(logRequest);
 
 app.get("/", (req, res) => {
-    res.send("API AgriCurify");
+  res.send("API AgriCurify");
 });
 
 app.use(authRoutes);
 
 app.listen(PORT, () => {
-    console.log("Server running on http://localhost:" + PORT);
+  console.log("Server running on http://localhost:" + PORT);
 });
