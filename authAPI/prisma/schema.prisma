@@ -20,3 +20,8 @@ model User {
   password String
   image    String?
 }
+
+model Blacklist {
+  id       Int      @id @default(autoincrement())
+  token    String   @unique
+}
