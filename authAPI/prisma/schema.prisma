@@ -22,6 +22,6 @@ model User {
 }
 
 model Blacklist {
-  id       Int      @id @default(autoincrement())
-  token    String   @unique
+  id    Int    @id @default(autoincrement())
+  token String @unique
 }
