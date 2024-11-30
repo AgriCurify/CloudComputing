@@ -1,6 +1,6 @@
-const express = require("express");
-const logRequest = require("./middleware/logs");
-const authRoutes = require("./routes/authRoutes");
+const express = require('express');
+const logRequest = require('./middleware/logs');
+const authRoute = require('./routes/authRoute');
 
 const app = express();
 
@@ -11,6 +11,6 @@ app.get("/", (req, res) => {
   res.send("API AgriCurify");
 });
 
-app.use(authRoutes);
+app.use(authRoute);
 
 module.exports = app;

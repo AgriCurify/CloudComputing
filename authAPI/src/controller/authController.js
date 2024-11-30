@@ -1,9 +1,9 @@
-const bcrypt = require("bcrypt");
-const { z } = require("zod");
+const bcrypt = require('bcrypt');
+const { z } = require('zod');
 const { registrationAuthModel, loginAuthModel, logoutAuthModel } = require('../models/authModel');
-const registerValidate = require("../validation/registerSchema");
-const loginValidate = require("../validation/loginSchema");
-const { generateToken } = require("../services/jwtService");
+const registerValidate = require('../validation/registerSchema');
+const loginValidate = require('../validation/loginSchema');
+const { generateToken } = require('../services/jwtService');
 
 const register = async (req, res) => {
   try {

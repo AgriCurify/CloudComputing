@@ -1,4 +1,4 @@
-const prisma = require("../config/db");
+const prisma = require('../config/db');
 
 const registrationAuthModel = async (name, email, hashedPassword) => {
   return prisma.user.create({

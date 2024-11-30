@@ -1,4 +1,4 @@
-const { z } = require("zod");
+const { z } = require('zod');
 
 const registerValidate = z.object({
   name: z
