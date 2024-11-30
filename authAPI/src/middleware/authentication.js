@@ -1,4 +1,4 @@
-const { prisma } = require("../config/db");
+const { tokenBlacklisted } = require('../models/authModel');
 const { verifyToken } = require("../services/jwtService");
 
 const auth = async (req, res, next) => {
@@ -13,9 +13,7 @@ const auth = async (req, res, next) => {
       return res.status(401).json({ message: "Token not found" });
     }
 
-    const blacklistEntry = await prisma.blacklist.findUnique({
-      where: { token }
-    });
+    const blacklistEntry = await await tokenBlacklisted(token);
 
     if (blacklistEntry) {
       return res.status(400).json({
@@ -28,7 +26,6 @@ const auth = async (req, res, next) => {
     
     next();
   } catch (err) {
-    console.error(err);
     return res.status(403).json({ message: "Invalid or expired token", error: err.message });
   }
 };
