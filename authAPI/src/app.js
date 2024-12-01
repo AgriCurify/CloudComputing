@@ -1,6 +1,7 @@
 const express = require('express');
 const logRequest = require('./middleware/logs');
 const authRoute = require('./routes/authRoute');
+const userRoute = require('./routes/userRoute');
 
 const app = express();
 
@@ -12,5 +13,6 @@ app.get("/", (req, res) => {
 });
 
 app.use(authRoute);
+app.use(userRoute);
 
 module.exports = app;
