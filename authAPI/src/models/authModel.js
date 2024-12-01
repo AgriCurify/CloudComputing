@@ -24,4 +24,10 @@ const logoutAuthModel = async (token) => {
   });
 };
 
-module.exports = { registrationAuthModel, loginAuthModel, logoutAuthModel };
+const tokenBlacklisted = async (token) => {
+  return prisma.blacklist.findUnique({
+    where: { token },
+  });
+};
+
+module.exports = { registrationAuthModel, loginAuthModel, logoutAuthModel, tokenBlacklisted };
