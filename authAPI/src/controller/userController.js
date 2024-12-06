@@ -1,8 +1,11 @@
 const { z } = require('zod');
 const bcrypt = require('bcrypt');
-const { getByTokenUserModel, getPassword, checkEmail, updateUserModel, updatePasswordModel} = require('../models/userModel');
+const path = require('path');
+const { getByTokenUserModel, getPassword, checkEmail, updateUserModel, updateImageModel, updatePasswordModel } = require('../models/userModel');
+const bucket = require('../services/googleCloud');
 const userValidate = require('../validation/userSchema')
 const passwordValidate = require('../validation/passwordSchema');
+const upload = require('../middleware/upload');
 
 const getByTokenUser = async (req, res) => {
     const user_id = req.user_id
@@ -45,6 +48,47 @@ const updateUser = async (req, res) => {
     }
 };
 
+const updateProfileImage = async (req, res) => {
+  const user_id = req.user_id;
+
+  upload.single('profileImage')(req, res, async (err) => {
+      if (err) {
+          return res.status(400).json({ message: err.message });
+      }
+
+      if (!req.file) {
+          return res.status(400).json({ message: "No file uploaded" });
+      }
+
+      try {
+          const fileName = `${user_id}-${Date.now()}${path.extname(req.file.originalname)}`;
+          
+          const file = bucket.file(fileName);
+          const stream = file.createWriteStream({
+              resumable: false,
+              contentType: req.file.mimetype,
+          });
+
+          stream.on('error', (error) => {
+              return res.status(500).json({ message: 'Error uploading image', error });
+          });
+
+          stream.on('finish', async () => {
+              const imageUrl = `https://storage.googleapis.com/${bucket.name}/${fileName}`;
+
+              await updateImageModel(user_id, imageUrl);
+
+              res.status(200).json({ message: 'Profile image updated successfully' });
+          });
+
+          stream.end(req.file.buffer);
+      } catch (error) {
+          console.log(error)
+          res.status(500).json({ message: 'Internal Server Error', error });
+      }
+  });
+};
+
 const changePassword = async (req, res) => {
     try {
       const { oldPassword, newPassword, confirmPassword } = passwordValidate.parse(req.body);
@@ -81,4 +125,4 @@ const changePassword = async (req, res) => {
     }
   };
 
-module.exports = { getByTokenUser, changePassword, updateUser };
+module.exports = { getByTokenUser, updateUser, updateProfileImage, changePassword };

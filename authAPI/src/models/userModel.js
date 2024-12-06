@@ -45,6 +45,17 @@ const updateUserModel = async (user_id, name, email) => {
   });
 };
 
+const updateImageModel = async (user_id, imageUrl) => {
+  return await prisma.user.update({
+    where: {
+      id: user_id,
+    },
+    data: {
+      image: imageUrl,
+    },
+  });
+};
+
 const updatePasswordModel = async (user_id, hashedPassword) => {
   return await prisma.user.update({
     where: {
@@ -56,4 +67,4 @@ const updatePasswordModel = async (user_id, hashedPassword) => {
   });
 };
 
-module.exports = { getByTokenUserModel, getPassword, checkEmail, updateUserModel, updatePasswordModel };
+module.exports = { getByTokenUserModel, getPassword, checkEmail, updateUserModel, updateImageModel, updatePasswordModel };
