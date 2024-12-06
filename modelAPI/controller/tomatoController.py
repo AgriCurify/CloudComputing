@@ -5,11 +5,11 @@ from tensorflow.keras.preprocessing import image
 import io
 import numpy as np
 
-model = load_model('models/tomato_model_1.h5')
+model = load_model('models/tomato_model_2.h5')
 
 logging.basicConfig(level=logging.DEBUG)
 
-class_labels = ['Not_Tomato', 'Tomato___Bacterial_spot', 'Tomato___Early_blight', 'Tomato___Leaf_Mold', 'Tomato___Septoria_leaf_spot', 'Tomato___Spider_mites Two-spotted_spider_mite', 'Tomato___Target_Spot', 'Tomato___Tomato_Yellow_Leaf_Curl_Virus', 'Tomato___Tomato_mosaic_virus', 'Tomato___healthy']
+class_labels = ['Not_Tomato', 'Tomato___Bacterial_spot', 'Tomato___Leaf_Mold', 'Tomato___Septoria_leaf_spot', 'Tomato___Spider_mites Two-spotted_spider_mite', 'Tomato___Tomato_Yellow_Leaf_Curl_Virus', 'Tomato___Tomato_mosaic_virus', 'Tomato___healthy']
 
 disease_info = {
     'Not_Tomato': {
@@ -27,18 +27,6 @@ disease_info = {
             'Prune plants to improve air circulation.',
             'Spray with copper-based fungicides for control.',
             'Practice crop rotation and avoid planting tomatoes in areas previously affected by bacterial spot.'
-        ]
-    },
-    'Tomato___Early_blight': {
-        'name': 'Tomato Early Blight',
-        'description': 'Early blight is a fungal disease that causes dark spots with concentric rings on leaves, leading to early defoliation.',
-        'treatment': [
-            'Use resistant tomato cultivars and pathogen-free seeds.',
-            'Rotate crops to reduce disease buildup.',
-            'Remove infected lower leaves and branches.',
-            'Avoid watering on the foliage to reduce leaf wetness.',
-            'Use fungicides like mancozeb, chlorothalonil, or copper fungicides.',
-            'Ensure proper fertilization with balanced nutrients, especially potassium and calcium.'
         ]
     },
     'Tomato___Leaf_Mold': {
@@ -74,16 +62,6 @@ disease_info = {
             'Use chili pepper solution or sulfur-based fungicides to reduce mite populations.',
             'Use miticides such as Dynamec, Oberon, or Omite for effective control.',
             'Control weeds, encourage natural predators like ladybirds and lacewings, and ensure adequate irrigation.'
-        ]
-    },
-    'Tomato___Target_Spot': {
-        'name': 'Tomato Target Spot',
-        'description': 'Target spot is a fungal disease that causes circular lesions with dark borders and tan centers on tomato leaves and fruit.',
-        'treatment': [
-            'Improve air circulation by spacing plants apart, pruning lower leaves, and avoiding excess nitrogen fertilization.',
-            'Apply products such as chlorothalonil, mancozeb, and azoxystrobin regularly (every 10-14 days) to prevent infection.',
-            'Rotate fungicides with different mechanisms of action to prevent resistance.',
-            'Remove and destroy infected plant material to reduce spore spread.'
         ]
     },
     'Tomato___Tomato_Yellow_Leaf_Curl_Virus': {
