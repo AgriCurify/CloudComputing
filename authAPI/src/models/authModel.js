@@ -6,6 +6,7 @@ const registrationAuthModel = async (name, email, hashedPassword) => {
       name,
       email,
       password: hashedPassword,
+      image: 'https://i.imgur.com/dETmvGX.png',
     },
   });
 };
