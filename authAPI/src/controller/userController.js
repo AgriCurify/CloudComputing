@@ -118,6 +118,7 @@ const changePassword = async (req, res) => {
   
     } catch (error) {
       if (error instanceof z.ZodError) {
+        const errors = error.errors.map((err) => err.message);
         return res.status(400).json({ message: 'Validation failed', errors });
       }
   
