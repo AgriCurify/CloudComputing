@@ -27,6 +27,12 @@ const updateUser = async (req, res) => {
     try {
         const { name, email } = userValidate.parse(req.body);
 
+        const existingUser = await checkEmail(email, user_id);
+
+        if (existingUser && existingUser.id === user_id) {
+            return res.status(400).json({ message: "Email is already registered" });
+        }
+
         const updatedUser = await updateUserModel(user_id, name, email);
         
         const { password, ...responseData } = updatedUser;
