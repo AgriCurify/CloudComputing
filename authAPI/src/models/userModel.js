@@ -24,15 +24,6 @@ const getPassword = async (user_id) => {
   });
 };
 
-const checkEmail = async (email, user_id) => {
-  return await prisma.user.findUnique({
-    where: {
-      email: email,
-      id: user_id
-    },
-  });
-};
-
 const updateUserModel = async (user_id, name, email) => {
   return await prisma.user.update({
     where: {
@@ -67,4 +58,4 @@ const updatePasswordModel = async (user_id, hashedPassword) => {
   });
 };
 
-module.exports = { getByTokenUserModel, getPassword, checkEmail, updateUserModel, updateImageModel, updatePasswordModel };
+module.exports = { getByTokenUserModel, getPassword, updateUserModel, updateImageModel, updatePasswordModel };
