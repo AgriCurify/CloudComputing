@@ -1,7 +1,7 @@
 const { z } = require('zod');
 const bcrypt = require('bcrypt');
 const path = require('path');
-const { getByTokenUserModel, getPassword, checkEmail, updateUserModel, updateImageModel, updatePasswordModel } = require('../models/userModel');
+const { getByTokenUserModel, getPassword, updateUserModel, updateImageModel, updatePasswordModel } = require('../models/userModel');
 const bucket = require('../services/googleCloud');
 const userValidate = require('../validation/userSchema')
 const passwordValidate = require('../validation/passwordSchema');
@@ -26,12 +26,6 @@ const updateUser = async (req, res) => {
     const user_id = req.user_id;
     try {
         const { name, email } = userValidate.parse(req.body);
-
-        const existingUser = await checkEmail(email, user_id);
-
-        if (existingUser && existingUser.id === user_id) {
-            return res.status(400).json({ message: "Email is already registered" });
-        }
 
         const updatedUser = await updateUserModel(user_id, name, email);
         
