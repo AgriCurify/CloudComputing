@@ -5,7 +5,7 @@ const { getByTokenUserModel, getPassword, updateUserModel, updateImageModel, upd
 const bucket = require('../services/googleCloud');
 const userValidate = require('../validation/userSchema')
 const passwordValidate = require('../validation/passwordSchema');
-const upload = require('../validation/uploadSchema');
+const uploadValidate = require('../validation/uploadSchema');
 
 const getByTokenUser = async (req, res) => {
     const user_id = req.user_id
@@ -45,7 +45,7 @@ const updateUser = async (req, res) => {
 const updateProfileImage = async (req, res) => {
   const user_id = req.user_id;
 
-  upload.single('profileImage')(req, res, async (err) => {
+  uploadValidate.single('profileImage')(req, res, async (err) => {
       if (err) {
           return res.status(400).json({ message: err.message });
       }
