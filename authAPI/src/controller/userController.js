@@ -5,7 +5,7 @@ const { getByTokenUserModel, getPassword, updateUserModel, updateImageModel, upd
 const bucket = require('../services/googleCloud');
 const userValidate = require('../validation/userSchema')
 const passwordValidate = require('../validation/passwordSchema');
-const upload = require('../middleware/upload');
+const upload = require('../validation/uploadSchema');
 
 const getByTokenUser = async (req, res) => {
     const user_id = req.user_id
