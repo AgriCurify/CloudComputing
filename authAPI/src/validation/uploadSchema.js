@@ -3,7 +3,8 @@ const multer = require('multer');
 const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
-    if (['image/jpeg', 'image/png', 'image/jpg'].includes(file.mimetype.toLowerCase())) {
+    const fileExtension = path.extname(file.originalname).toLowerCase();
+    if (['.jpg', '.jpeg', '.png'].includes(fileExtension)) {
         cb(null, true);
     } else {
         cb(new Error('Invalid file type. Only JPG, JPEG, and PNG are allowed.'), false);
