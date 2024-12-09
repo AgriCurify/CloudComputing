@@ -5,7 +5,7 @@ from tensorflow.keras.preprocessing import image
 import io
 import numpy as np
 
-model = load_model('models/apple_model_1.h5')
+model = load_model('models/apple_model_2.h5')
 
 logging.basicConfig(level=logging.DEBUG)
 
