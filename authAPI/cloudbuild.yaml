@@ -4,7 +4,8 @@ steps:
   args:
     - '-c'
     - |
-        # Menavigasi ke folder yang tepat dan melakukan deploy
-        cd authAPI
-        gcloud app deploy app.yaml --quiet
+        gcloud app deploy authAPI/app.yaml --quiet
 timeout: '1600s'
+options:
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+logsBucket: 'gs://agricurify-cloudbuild-logs'
