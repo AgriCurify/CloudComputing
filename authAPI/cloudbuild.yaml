@@ -1,8 +1,10 @@
 steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'bash'
-  args: ['-c', 'gcloud config set app/cloud_build_timeout 1600 && gcloud app deploy authAPI/app.yaml --quiet']
+  args:
+    - '-c'
+    - |
+        # Menavigasi ke folder yang tepat dan melakukan deploy
+        cd authAPI
+        gcloud app deploy app.yaml --quiet
 timeout: '1600s'
-options:
-  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
-logsBucket: 'gs://agricurify-cloudbuild-logs'
