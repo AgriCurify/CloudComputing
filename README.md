@@ -20,7 +20,7 @@
   <pre>POST /predict/tomato</pre>
 
 ## Tech Stack 
-Javascript, Node.js, Express.js, MySQL, Prisma, Python, Flask, App Engine, Cloud Build, Cloud SQL, Cloud Storage, Secret Manager.
+Node.js, Express.js, MySQL, Prisma, Flask, App Engine, Cloud Build, Cloud SQL, Cloud Storage, Secret Manager.
 
 ## Documentation API
 
